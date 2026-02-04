@@ -226,7 +226,10 @@ int main(int argc, char* argv[]) {
      "number of grid steps in etas")
     ("etas-shift",
      po::value<double>()->value_name("FLOAT")->default_value(0., "0"),
-     "etas at grid center,\nuse if Ebeam1 != Ebeam2");
+     "etas at grid center,\nuse if Ebeam1 != Ebeam2")
+     ("etasgrid-max",
+     po::value<double>()->value_name("FLOAT")->default_value(1.0, "1.0"),
+     "maximum etas value of grid");
 
   // Make a meta-group containing all the option groups except the main
   // positional options (don't want the auto-generated usage info for those).

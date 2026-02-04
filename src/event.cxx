@@ -60,7 +60,10 @@ Event::Event(const VarMap& var_map)
       eta_max_( std::acosh(.5*sqrts_/kT_min_) ),
       // eta_grid_max_(sqrts) is the range of the computing grid
       // it also has a physical meaning though
-      eta_grid_max_( std::acosh(.5*sqrts_/0.2) ),
+      //eta_grid_max_( std::acosh(.5*sqrts_/0.2) ),
+     // eta_grid_max_( 20.0),
+     //eta_grid_max_(var_map["etasgrid-max"].as<double>()),
+     eta_grid_max_(std::max(var_map["etasgrid-max"].as<double>(), eta_max_)),
       etas_shift_(var_map["etas-shift"].as<double>()),
       mult_etas_low_( std::max(etas_shift_ - eta_grid_max_, var_map["mult-etas-low"].as<double>()) ),
       mult_etas_high_( std::min(std::max(mult_etas_low_, var_map["mult-etas-high"].as<double>()), etas_shift_ + eta_grid_max_) ),
@@ -82,6 +85,11 @@ Event::Event(const VarMap& var_map)
       multiplicity_(std::numeric_limits<double>::quiet_NaN()),
       fastexp_xa_xb_(-2.*eta_grid_max_, 2.*eta_grid_max_, 4000)
   {
+      // Print statements for detas_ and eta grid min/max
+  //std::cout << detas_ << std::endl;
+  //std::cout <<  eta_grid_max_ << std::endl;
+  //std::cout <<  eta_max_ << std::endl;
+  //std::cout <<  -eta_grid_max_ << std::endl;
   // light-cone moemtnum compoents of the projectile (per nucleon)
   // P+ = (E+|Pz|)/2 = (sqrts/2.+pabs)/2. = Mproton * exp(ybeam)
   Pplus_ = (sqrts_/2. + nucleon_pabs_)/2.;
