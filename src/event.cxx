@@ -282,7 +282,8 @@ void Event::compute_density() {
 
   #pragma omp parallel for
   for (int iz = 0; iz < nsteps_etas_; ++iz) {
-    double etas = etas_shift_ - eta_grid_max_ + (iz+.5) * detas_;
+   // double etas = etas_shift_ - eta_grid_max_ + (iz+.5) * detas_;
+    double etas = etas_shift_ - eta_grid_max_ + (iz) * detas_;
     if ((etas <= -eta_grid_max_) || (etas >= eta_grid_max_)) {
       // Density_[iz] was already filled with zeroes above, no need to zero it
       ixcm_[iz] = 0.;
